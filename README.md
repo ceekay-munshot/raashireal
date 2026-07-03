@@ -52,11 +52,13 @@ npm run dev        # http://localhost:5173
 npm run build      # → dist/
 ```
 
-## Deploy (Cloudflare Pages)
+## Deploy (Cloudflare Workers)
+Deployed via Cloudflare Workers Builds (Git integration). `wrangler.jsonc` serves the
+built `dist/` as static assets with SPA routing.
 - **Build command:** `npm run build`
-- **Output directory:** `dist`
+- **Deploy command:** `npx wrangler deploy` (or `npm run deploy`, which builds + deploys)
 
-Vite is configured with `base: './'` so assets resolve correctly on Pages.
+Vite uses `base: './'` so assets resolve correctly.
 
 ## Stack
 React + Vite + Recharts, one hand-built CSS design system (light, warm, Rashi-brand accent).
