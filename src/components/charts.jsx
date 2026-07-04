@@ -99,6 +99,37 @@ export function SingleBars({ id, metric, yearMin, height = 240, fmt = v => v, yF
   )
 }
 
+/* generic stacked bars. data:[{x, ...}]  keys:[{k,label,color}] */
+export function StackBars({ data, keys, height = 240, fmt = v => v, yFmt, showLegend = true, layout = 'vertical' }) {
+  const Tip = ({ active, payload, label }) => {
+    if (!active || !payload?.length) return null
+    const total = payload.reduce((s, p) => s + (p.value || 0), 0)
+    return <div className="rc-tip"><div className="rt-h">{label}</div>
+      {payload.filter(p => p.value != null && p.value !== 0).map(p => (
+        <div className="rt-r" key={p.dataKey}><span className="dot" style={{ background: p.fill }} />
+          {keys.find(k => k.k === p.dataKey)?.label || p.dataKey}<b>{fmt(p.value)}</b></div>))}
+      <div className="rt-r" style={{ marginTop: 3, borderTop: '1px solid #eee', paddingTop: 3 }}>Total<b>{fmt(total)}</b></div>
+    </div>
+  }
+  return (
+    <>
+      <ResponsiveContainer width="100%" height={height}>
+        <BarChart data={data} margin={{ top: 8, right: 10, left: -8, bottom: 0 }}>
+          <CartesianGrid {...GRID} />
+          <XAxis dataKey="x" {...AX} />
+          <YAxis {...AX} width={46} tickFormatter={yFmt || fmt} />
+          <Tooltip content={<Tip />} cursor={{ fill: 'rgba(0,0,0,.03)' }} />
+          {keys.map((k, i) => (
+            <Bar key={k.k} dataKey={k.k} name={k.label} stackId="a" fill={k.color} maxBarSize={64}
+              radius={i === keys.length - 1 ? [5, 5, 0, 0] : [0, 0, 0, 0]} />
+          ))}
+        </BarChart>
+      </ResponsiveContainer>
+      {showLegend && <Legend items={keys.map(k => ({ label: k.label, color: k.color }))} />}
+    </>
+  )
+}
+
 /* arbitrary-array line (for operational KPIs not in the financial dataset) */
 export function KpiLine({ labels, series, height = 220, fmt = v => v, showLegend = true }) {
   // series: [{name,color,values:[]}]
