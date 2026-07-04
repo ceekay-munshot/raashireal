@@ -56,7 +56,7 @@ export default function Scorecard({ selected, openModal }) {
           leads on <b>ROCE and cash cycle</b>; Creative leads on <b>margin</b>. That's your talking map.</Insight>
       </Card>
 
-      <div className="grid g-4" style={{ gap: 12 }}>
+      <div className="grid" style={{ gridTemplateColumns: 'repeat(5, 1fr)', gap: 12 }}>
         {LEADERS.map(l => {
           const id = leaderOf(l.key, l.dir)
           const col = COLS.find(c => c.key === l.key)

@@ -10,6 +10,7 @@ import Operations from './tabs/Operations.jsx'
 import Whitespace from './tabs/Whitespace.jsx'
 import Ownership from './tabs/Ownership.jsx'
 import MetricExplorer from './tabs/MetricExplorer.jsx'
+import Valuation from './tabs/Valuation.jsx'
 
 const TABS = [
   { id: 'overview', label: 'Overview', icon: '🏠', C: Overview },
@@ -19,12 +20,13 @@ const TABS = [
   { id: 'score', label: 'Peer Scorecard', icon: '🏆', C: Scorecard },
   { id: 'ops', label: 'Operations & Scale', icon: '🏭', C: Operations },
   { id: 'own', label: 'Ownership', icon: '🏦', C: Ownership },
+  { id: 'val', label: 'Valuation', icon: '💵', C: Valuation },
   { id: 'metric', label: 'Metric Explorer', icon: '🔍', C: MetricExplorer },
 ]
 
 export default function App() {
   const [tab, setTab] = useState('overview')
-  const [selected, setSelected] = useState(COMPANIES.map(c => c.id))
+  const [selected, setSelected] = useState(['RPTECH', 'REDINGTON', 'CREATIVE']) // Compuage off by default (thin data)
   const [modal, setModal] = useState(null)
   const openModal = (m) => setModal(m)
   const Active = TABS.find(t => t.id === tab).C

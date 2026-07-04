@@ -37,23 +37,16 @@ export default function MetricExplorer({ selected }) {
 
   return (
     <div className="grid" style={{ gap: 14 }}>
-      <Card title="Metric explorer" sub="Pick any metric — every selected company is compared on it, over time and today.">
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14 }}>
-          {GROUPS.map(g => (
-            <div key={g} style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
-              <div style={{ fontSize: 10.5, fontWeight: 800, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.05em' }}>{g}</div>
-              <div className="pill-row">
-                {METRICS.filter(x => x.g === g).map(x => (
-                  <button key={x.k} onClick={() => setMk(x.k)}
-                    className="chip" style={mk === x.k ? { background: 'var(--rashi)', color: '#fff', borderColor: 'transparent' } : {}}>
-                    {x.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </Card>
+      <div className="compare" style={{ marginBottom: 0 }}>
+        <span className="lbl">Metric</span>
+        <select value={mk} onChange={e => setMk(e.target.value)}
+          style={{ font: 'inherit', fontSize: 13.5, fontWeight: 700, color: 'var(--ink)', padding: '9px 14px',
+            borderRadius: 11, border: '1.5px solid var(--line-2)', background: 'var(--surface)', cursor: 'pointer', minWidth: 230 }}>
+          {GROUPS.map(g => <optgroup key={g} label={g}>
+            {METRICS.filter(x => x.g === g).map(x => <option key={x.k} value={x.k}>{x.label}</option>)}</optgroup>)}
+        </select>
+        <span className="hint">Pick any metric — all selected companies compared, over time &amp; today.</span>
+      </div>
 
       <div className="grid g-12">
         <ChartCard title={`${m.label} — over time`} sub="All selected companies, same axis"

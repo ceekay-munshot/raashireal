@@ -10,9 +10,8 @@ export default function Capital({ selected, openModal }) {
   const R = latest('RPTECH'), RED = latest('REDINGTON')
   return (
     <div className="grid" style={{ gap: 14 }}>
-      <div className="grid g-12">
+      <div className="grid g-2">
         <ChartCard title="Where Rashi's cash gets stuck" sub="Cash conversion cycle, broken apart · inventory + receivables − payables"
-          span
           onExpand={() => openModal({ title: 'Cash conversion cycle — decomposed', sub: 'Higher stack = more cash locked in the business',
             content: <CCCStack id="RPTECH" yearMin={2019} height={320} /> })}
           chart={<CCCStack id="RPTECH" yearMin={2020} height={260} />}
@@ -27,7 +26,7 @@ export default function Capital({ selected, openModal }) {
             <b> ~{Math.round(RED.ccc)}d</b>. Rashi ties up nearly <b>2×</b> the working capital per rupee of sales.</Insight>} />
       </div>
 
-      <div className="grid g-12">
+      <div className="grid g-2">
         <ChartCard title="Return on capital employed" sub="ROCE % · the distributor's true scoreboard"
           chart={<TrendChart ids={selected} metric="roce" yearMin={2019} height={240} fmt={v => pct(v, 0)} />}
           table={<SeriesTable ids={selected} metric="roce" fmt={v => pct(v)} yearMin={2019} />}
