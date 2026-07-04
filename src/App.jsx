@@ -8,14 +8,18 @@ import Capital from './tabs/Capital.jsx'
 import Scorecard from './tabs/Scorecard.jsx'
 import Operations from './tabs/Operations.jsx'
 import Whitespace from './tabs/Whitespace.jsx'
+import Ownership from './tabs/Ownership.jsx'
+import MetricExplorer from './tabs/MetricExplorer.jsx'
 
 const TABS = [
   { id: 'overview', label: 'Overview', icon: '🏠', C: Overview },
   { id: 'growth', label: 'Growth & Margins', icon: '📊', C: Growth },
   { id: 'capital', label: 'Capital Engine', icon: '💰', C: Capital },
+  { id: 'white', label: 'Business & Whitespace', icon: '🧩', C: Whitespace },
   { id: 'score', label: 'Peer Scorecard', icon: '🏆', C: Scorecard },
   { id: 'ops', label: 'Operations & Scale', icon: '🏭', C: Operations },
-  { id: 'white', label: 'Product & Whitespace', icon: '🧭', C: Whitespace },
+  { id: 'own', label: 'Ownership', icon: '🏦', C: Ownership },
+  { id: 'metric', label: 'Metric Explorer', icon: '🔍', C: MetricExplorer },
 ]
 
 export default function App() {
